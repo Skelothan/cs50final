@@ -11,7 +11,8 @@ function love.load()
 		fullscreen = false,
 		resizable = true
 	})
-		
+	
+	love.keyboard.keysPressed = {}
 end
 
 function love.resize(w, h)
@@ -19,5 +20,17 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
+	love.keyboard.keysPressed = {}
+end
 
+function love.keypressed(key)
+	love.keyboard.keysPressed[key] = true
+end
+
+function love.keyboard.wasPressed(key)
+	if love.keyboard.keysPressed[key] then
+		return true
+	else
+		return false
+	end
 end
