@@ -12,6 +12,9 @@ function love.load()
 		resizable = true
 	})
 	
+	gStateMachine = StateMachine {
+	}
+	
 	love.keyboard.keysPressed = {}
 end
 
@@ -20,6 +23,8 @@ function love.resize(w, h)
 end
 
 function love.update(dt)
+	gStateMachine:update(dt)
+	
 	love.keyboard.keysPressed = {}
 end
 
@@ -33,4 +38,12 @@ function love.keyboard.wasPressed(key)
 	else
 		return false
 	end
+end
+
+function love.draw()
+	push:apply("start")
+	
+	gStateMachine:render()
+	
+	push:apply('end')
 end
