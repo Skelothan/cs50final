@@ -1,10 +1,10 @@
 -- gotta say, Lua's dependencies system is far superior to Python's
-require 'src/dependencies'
+require "src/dependencies"
 
 function love.load()
-	love.graphics.setDefaultFilter('nearest', 'nearest')
+	love.graphics.setDefaultFilter("nearest", "nearest")
 	math.randomseed(os.time())
-	love.window.setTitle('Destroy CS50')
+	love.window.setTitle("Destroy CS50")
 	
 	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
 		vsync = true,
@@ -12,8 +12,15 @@ function love.load()
 		resizable = true
 	})
 	
-	gStateMachine = StateMachine {
+	gTextures = {
+	["player_ship"] = love.graphics.newImage("graphics/player/ship2.png"),
+	["player_shot"] = love.graphics.newImage("graphics/player/playershot.png")
 	}
+	
+	gStateMachine = StateMachine {
+	["play"] = function() return PlayState() end
+	}
+	gStateMachine:change("play", {})
 	
 	love.keyboard.keysPressed = {}
 end
@@ -45,5 +52,5 @@ function love.draw()
 	
 	gStateMachine:render()
 	
-	push:apply('end')
+	push:apply("end")
 end
