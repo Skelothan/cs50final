@@ -1,5 +1,6 @@
 push = require "lib/push"
 Class = require "lib/class"
+require "lib/cs50util"
 
 require "src/constants"
 
@@ -10,3 +11,4 @@ require "lib/BaseState"
 require "src/states/PlayState"
 
 require "src/PlayerShip"
+require "src/PlayerShot"

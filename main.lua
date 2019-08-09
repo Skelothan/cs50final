@@ -13,9 +13,16 @@ function love.load()
 	})
 	
 	gTextures = {
-	["player_ship"] = love.graphics.newImage("graphics/player/ship2.png"),
-	["player_shot"] = love.graphics.newImage("graphics/player/playershot.png")
+		["player_ship"] = love.graphics.newImage("graphics/player/ship2.png"),
+		["player_shot"] = love.graphics.newImage("graphics/player/playershot.png")
 	}
+	
+	--[[
+	gFrames = {
+		["player_ship"] = GenerateQuads(gTextures["player_ship"], 48, 32),
+		["player_shot"] = GenerateQuads(gTextures["player_shot"], 8, 24)
+	}
+	]]
 	
 	gStateMachine = StateMachine {
 	["play"] = function() return PlayState() end

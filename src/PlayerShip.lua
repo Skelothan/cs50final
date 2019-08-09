@@ -9,6 +9,10 @@ function PlayerShip:init()
 	self.RENDER_OFFSET_T = 16
 	self.RENDER_OFFSET_B = 6
 	
+	self.GUN_OFFSET = 16
+	
+	self.shot_delay = 0
+	
 	self.dx = 0
 	self.dy = 0
 	
@@ -20,25 +24,27 @@ function PlayerShip:init()
 	self.radius = 4
 end
 
-function PlayerShip:update()
+function PlayerShip:update(dt)
 	if love.keyboard.isDown("left") then
-		self.dx = -4
+		self.dx = -128
 	elseif love.keyboard.isDown("right") then
-		self.dx = 4
+		self.dx = 128
 	else
 		self.dx = 0
 	end
 	
 	if love.keyboard.isDown("up") then
-		self.dy = -4
+		self.dy = -128
 	elseif love.keyboard.isDown("down") then
-		self.dy = 4
+		self.dy = 128
 	else
 		self.dy = 0
 	end
 	
-	self.x = math.min(math.max(self.RENDER_OFFSET_X - 1, self.x + self.dx), VIRTUAL_WIDTH - self.width - self.RENDER_OFFSET_X - 1)
-	self.y = math.min(math.max(self.RENDER_OFFSET_T - 1, self.y + self.dy), VIRTUAL_HEIGHT - self.height - self.RENDER_OFFSET_B - 1)
+	self.x = math.min(math.max(self.RENDER_OFFSET_X - 1, self.x + self.dx * dt), VIRTUAL_WIDTH - self.width - self.RENDER_OFFSET_X - 1)
+	self.y = math.min(math.max(self.RENDER_OFFSET_T - 1, self.y + self.dy * dt), VIRTUAL_HEIGHT - self.height - self.RENDER_OFFSET_B - 1)
+	
+	self.shot_delay = math.max(self.shot_delay - dt, 0)
 end
 
 function PlayerShip:render()
