@@ -26,17 +26,17 @@ end
 
 function PlayerShip:update(dt)
 	if love.keyboard.isDown("left") then
-		self.dx = -128
+		self.dx = -256
 	elseif love.keyboard.isDown("right") then
-		self.dx = 128
+		self.dx = 256
 	else
 		self.dx = 0
 	end
 	
 	if love.keyboard.isDown("up") then
-		self.dy = -128
+		self.dy = -256
 	elseif love.keyboard.isDown("down") then
-		self.dy = 128
+		self.dy = 256
 	else
 		self.dy = 0
 	end

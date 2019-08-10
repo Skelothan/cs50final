@@ -12,3 +12,4 @@ require "src/states/PlayState"
 
 require "src/PlayerShip"
 require "src/PlayerShot"
+require "src/Explosion"

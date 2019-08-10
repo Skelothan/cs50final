@@ -3,6 +3,7 @@ PlayState = Class{__includes = BaseState}
 function PlayState:enter(params)
 	self.player = PlayerShip()
 	self.player_shots = {}
+	self.explosions = {}
 end
 
 function PlayState:update(dt)
@@ -22,10 +23,28 @@ function PlayState:update(dt)
 		self.player.shot_delay = 2/60
 	end
 	
-	self.player:update(dt)
+	if love.keyboard.wasPressed("e") then
+		new_explosion = Explosion({
+			x = self.player.x,
+			y = self.player.y - 160
+		})
+		table.insert(self.explosions, new_explosion)
+	end
 	
-	for k, shot in pairs(self.player_shots) do
+	self.player:update(dt)
+	for k = #self.player_shots, 1, -1 do
+		shot = self.player_shots[k]
 		shot:update(dt)
+		if shot.destroyed then
+			table.remove(self.player_shots, k)
+		end
+	end
+	for k = #self.explosions, 1, -1 do
+		explosion = self.explosions[k]
+		explosion:update(dt)
+		if explosion.destroyed then
+			table.remove(self.explosions, k)
+		end
 	end
 end
 
@@ -34,5 +53,8 @@ function PlayState:render()
 	
 	for k, shot in pairs(self.player_shots) do
 		shot:render()
+	end
+	for k, explosion in pairs(self.explosions) do
+		explosion:render()
 	end
 end
