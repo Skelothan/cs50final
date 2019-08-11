@@ -16,6 +16,10 @@ function Enemy:init(x, y, params)
 	self.score = params.score
 	
 	self.shotTimer = params.shotTimer
+	
+	self.texture = params.texture
+	self.frame = params.frame
+	self.frame_number = params.frame_number
 end
 
 function Enemy.update(self, dt)
@@ -35,4 +39,5 @@ function Enemy.on_death(self, play_state)
 end
 
 function Enemy:render()
+	love.graphics.draw(gTextures[self.texture], gFrames[self.frame][self.frame_number], self.x, self.y)
 end

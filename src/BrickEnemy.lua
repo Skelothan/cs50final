@@ -43,7 +43,3 @@ function BrickEnemy.shoot(self, play_state)
 		table.insert(play_state.enemy_shots, newShot)
 	end
 end
-
-function BrickEnemy:render()
-	love.graphics.draw(gTextures["breakout"], gFrames["breakout_bricks"][10], self.x, self.y)
-end

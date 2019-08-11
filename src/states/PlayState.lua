@@ -43,7 +43,10 @@ function PlayState:update(dt)
 			dy = 10,
 			health = 200,
 			score = 400,
-			shotTimer = 3
+			shotTimer = 3,
+			texture = "breakout",
+			frame = "breakout_bricks",
+			frame_number = math.random(1,20)
 		})
 		table.insert(self.enemies, new_enemy)
 	end
