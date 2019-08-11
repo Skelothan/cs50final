@@ -7,8 +7,12 @@ function Enemy:init(x, y, params)
 	self.dx = params.dx
 	self.dy = params.dy
 	
+	self.shape = params.shape
 	self.width = params.width
 	self.height = params.height
+	if self.shape == "circle" then
+		self.radius = self.width/2
+	end
 	
 	self.health = params.health
 	self.destroyed = false

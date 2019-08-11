@@ -37,6 +37,7 @@ function PlayState:update(dt)
 	
 	if love.keyboard.wasPressed("n") then
 		local new_enemy = BrickEnemy(math.random(16, VIRTUAL_WIDTH-16), -16, {
+			shape = "rectangle",
 			height = 16,
 			width = 32,
 			dx = 0,
@@ -80,8 +81,17 @@ function PlayState:update(dt)
 	for k, shot in pairs(self.player_shots) do
 		-- enemies
 		for k, enemy in pairs(self.enemies) do
-			-- todo: check enemy hitbox shape
-			if check_collision_cr(shot, enemy) then
+			local collided = false
+			if enemy.shape == "rectangle" then
+				if check_collision_cr(shot, enemy) then
+					collided = true
+				end
+			elseif enemy.shape == "circle" then
+				if check_collision_cc(shot, enemy) then
+					collided = true
+				end
+			end
+			if collided then
 				shot.destroyed = true
 				enemy.health = enemy.health - shot.damage
 				if enemy.health <= 0 then
@@ -143,17 +153,16 @@ end
 
 function PlayState:render()
 	self.player:render()
-	
+	for k, enemy in pairs(self.enemies) do
+		enemy:render()
+	end
 	for k, shot in pairs(self.player_shots) do
+		shot:render()
+	end
+	for k, shot in pairs(self.enemy_shots) do
 		shot:render()
 	end
 	for k, explosion in pairs(self.explosions) do
 		explosion:render()
-	end
-	for k, enemy in pairs(self.enemies) do
-		enemy:render()
-	end
-	for k, shot in pairs(self.enemy_shots) do
-		shot:render()
 	end
 end
