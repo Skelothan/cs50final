@@ -13,6 +13,8 @@ function Enemy:init(x, y, params)
 	self.health = params.health
 	self.destroyed = false
 	
+	self.score = params.score
+	
 	self.shotTimer = params.shotTimer
 end
 
@@ -22,6 +24,13 @@ function Enemy.update(self, dt)
 
 	if self.health <= 0 then
 		self.destroyed = true
+	end
+end
+
+function Enemy.on_death(self, play_state)
+	if not self.destroyed then
+		self.destroyed = true
+		play_state.score = play_state.score + self.score
 	end
 end
 

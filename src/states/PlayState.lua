@@ -6,6 +6,7 @@ function PlayState:enter(params)
 	self.explosions = {}
 	self.enemies = {}
 	self.enemy_shots = {}
+	self.score = 0
 end
 
 function PlayState:update(dt)
@@ -35,21 +36,31 @@ function PlayState:update(dt)
 	end
 	
 	if love.keyboard.wasPressed("n") then
-		local new_enemy = BrickEnemy(math.random(16, VIRTUAL_WIDTH-16), 16, {
+		local new_enemy = BrickEnemy(math.random(16, VIRTUAL_WIDTH-16), -16, {
 			height = 16,
 			width = 32,
 			dx = 0,
 			dy = 10,
 			health = 200,
-			shotTimer = 0.1
+			score = 400,
+			shotTimer = 3
 		})
 		table.insert(self.enemies, new_enemy)
 	end
 	
 	-- move/update everything
 	self.player:update(dt)
-	for k, object in pairs(self.player_shots, self.explosions, self.enemies, self.enemy_shots) do
+	for k, object in pairs(self.player_shots) do
 		object:update(dt)
+	end
+	for k, object in pairs(self.explosions) do
+		object:update(dt)
+	end
+	for k, object in pairs(self.enemy_shots) do
+		object:update(dt)
+	end
+	for k, object in pairs(self.enemies) do
+		object:update(dt, self)
 	end
 	
 	-- TODO: collision handling
