@@ -2,9 +2,12 @@ BrickEnemy = Class{__includes = Enemy}
 
 function BrickEnemy:update(dt, play_state)
 	self.shotTimer = self.shotTimer - dt
-	if self.shotTimer <= 0 then
+	if self.shotTimer <= 0 and self.y < VIRTUAL_HEIGHT/2 then
 		self.shoot(self, play_state)
 		self.shotTimer = 3
+	end
+	if self.y > VIRTUAL_HEIGHT + self.height + 1 then
+		self.destroyed = true
 	end
 	
 	Enemy.update(self, dt)
