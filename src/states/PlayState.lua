@@ -25,6 +25,7 @@ function PlayState:update(dt)
 		self.player.shot_delay = 2/60
 	end
 	
+	-- debug controls
 	if love.keyboard.wasPressed("e") then
 		local new_explosion = Explosion({
 			x = self.player.x,
@@ -45,33 +46,26 @@ function PlayState:update(dt)
 		table.insert(self.enemies, new_enemy)
 	end
 	
+	-- move/update everything
 	self.player:update(dt)
-	for k = #self.player_shots, 1, -1 do
-		shot = self.player_shots[k]
-		shot:update(dt)
-		if shot.destroyed then
-			table.remove(self.player_shots, k)
-		end
+	for k, object in pairs(self.player_shots, self.explosions, self.enemies, self.enemy_shots) do
+		object:update(dt)
 	end
-	for k = #self.explosions, 1, -1 do
-		explosion = self.explosions[k]
-		explosion:update(dt)
-		if explosion.destroyed then
-			table.remove(self.explosions, k)
-		end
-	end
-	for k = #self.enemies, 1, -1 do
-		enemy = self.enemies[k]
-		enemy:update(dt, self)
-		if enemy.destroyed then
-			table.remove(self.enemies, k)
-		end
-	end
-	for k = #self.enemy_shots, 1, -1 do
-		enemy_shot = self.enemy_shots[k]
-		enemy_shot:update(dt)
-		if enemy_shot.destroyed then
-			table.remove(self.enemy_shots, k)
+	
+	-- TODO: collision handling
+	
+	-- remove all destroyed objects from play
+	remove_destroyed_objects(self.player_shots)
+	remove_destroyed_objects(self.explosions)
+	remove_destroyed_objects(self.enemies)
+	remove_destroyed_objects(self.enemy_shots)
+end
+
+function remove_destroyed_objects(check_table)
+	for k = #check_table, 1, -1 do
+		object = check_table[k]
+		if object.destroyed then
+			table.remove(check_table, k)
 		end
 	end
 end
