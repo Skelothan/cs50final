@@ -15,11 +15,14 @@ function love.load()
 	gTextures = {
 		["player_ship"] = love.graphics.newImage("graphics/player/ship2.png"),
 		["player_shot"] = love.graphics.newImage("graphics/player/playershot.png"),
-		["explosion"] = love.graphics.newImage("graphics/shared/explosion.png")
+		["explosion"] = love.graphics.newImage("graphics/shared/explosion.png"),
+		["breakout"] = love.graphics.newImage("graphics/enemy/breakout.png")
 	}
 	
 	gFrames = {
-		["explosion"] = GenerateQuads(gTextures["explosion"], 16, 16)
+		["explosion"] = GenerateQuads(gTextures["explosion"], 16, 16),
+		["breakout_bricks"] = GenerateQuads(gTextures["breakout"], 32, 16), -- valid values: 1-21
+		["breakout_balls"] = GenerateQuads(gTextures["breakout"], 8, 8) -- valid values: 157-160, 181-183 inclusive
 	}
 	
 	gStateMachine = StateMachine {
