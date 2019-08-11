@@ -3,7 +3,7 @@ PlayState = Class{__includes = BaseState}
 function PlayState:enter(params)
 	self.player = PlayerShip()
 	self.player_shots = {}
-	self.explosions = {}
+	self.effects = {}
 	self.enemies = {}
 	self.enemy_shots = {}
 	self.score = 0
@@ -28,11 +28,14 @@ function PlayState:update(dt)
 	
 	-- debug controls
 	if love.keyboard.wasPressed("e") then
-		local new_explosion = Explosion({
+		local new_effect = Effect({
 			x = self.player.x,
-			y = self.player.y - 160
+			y = self.player.y - 160,
+			texture = "eff_explosion",
+			anim_timer = 0.05,
+			last_frame = 5
 		})
-		table.insert(self.explosions, new_explosion)
+		table.insert(self.effects, new_effect)
 	end
 	
 	if love.keyboard.wasPressed("n") then
@@ -57,7 +60,7 @@ function PlayState:update(dt)
 	for k, object in pairs(self.player_shots) do
 		object:update(dt)
 	end
-	for k, object in pairs(self.explosions) do
+	for k, object in pairs(self.effects) do
 		object:update(dt)
 	end
 	for k, object in pairs(self.enemy_shots) do
@@ -92,15 +95,29 @@ function PlayState:update(dt)
 				end
 			end
 			if collided then
+				-- destroy player shot, create effect
 				shot.destroyed = true
+				local new_effect = Effect({
+					x = shot.x - shot.width/2,
+					y = enemy.y + enemy.height,
+					texture = "eff_player_shot",
+					anim_timer = 0.025,
+					last_frame = 3
+				})
+				table.insert(self.effects, new_effect)
+				
+				-- subtract enemy health, kill enemy if its health id below zero
 				enemy.health = enemy.health - shot.damage
 				if enemy.health <= 0 then
 					enemy.on_death(enemy, self)
-					local new_explosion = Explosion({
+					local new_effect = Effect({
 						x = enemy.x + enemy.width/2 - 8,
-						y = enemy.y + enemy.height/2 - 8
+						y = enemy.y + enemy.height/2 - 8,
+						texture = "eff_explosion",
+						anim_timer = 0.05,
+						last_frame = 5
 					})
-					table.insert(self.explosions, new_explosion)
+					table.insert(self.effects, new_effect)
 				end
 			end
 		end
@@ -108,7 +125,7 @@ function PlayState:update(dt)
 	
 	-- remove all destroyed objects from play
 	remove_destroyed_objects(self.player_shots)
-	remove_destroyed_objects(self.explosions)
+	remove_destroyed_objects(self.effects)
 	remove_destroyed_objects(self.enemies)
 	remove_destroyed_objects(self.enemy_shots)
 end
@@ -162,7 +179,7 @@ function PlayState:render()
 	for k, shot in pairs(self.enemy_shots) do
 		shot:render()
 	end
-	for k, explosion in pairs(self.explosions) do
-		explosion:render()
+	for k, effect in pairs(self.effects) do
+		effect:render()
 	end
 end

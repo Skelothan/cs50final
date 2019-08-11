@@ -12,7 +12,7 @@ require "src/states/PlayState"
 
 require "src/PlayerShip"
 require "src/PlayerShot"
-require "src/Explosion"
+require "src/Effect"
 require "src/Enemy"
 require "src/BrickEnemy"
 require "src/EnemyShot"
