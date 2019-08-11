@@ -66,7 +66,35 @@ function PlayState:update(dt)
 		object:update(dt, self)
 	end
 	
-	-- TODO: collision handling
+	-- Collision handling
+	-- Enemy shots and...
+	for k, shot in pairs(self.enemy_shots) do
+		-- player
+		if check_collision_cc(shot, self.player) then
+			shot.destroyed = true
+			-- TODO: damage
+		end
+	end
+	
+	-- Player shots and...
+	for k, shot in pairs(self.player_shots) do
+		-- enemies
+		for k, enemy in pairs(self.enemies) do
+			-- todo: check enemy hitbox shape
+			if check_collision_cr(shot, enemy) then
+				shot.destroyed = true
+				enemy.health = enemy.health - shot.damage
+				if enemy.health <= 0 then
+					enemy.on_death(enemy, self)
+					local new_explosion = Explosion({
+						x = enemy.x + enemy.width/2 - 8,
+						y = enemy.y + enemy.height/2 - 8
+					})
+					table.insert(self.explosions, new_explosion)
+				end
+			end
+		end
+	end
 	
 	-- remove all destroyed objects from play
 	remove_destroyed_objects(self.player_shots)
@@ -82,6 +110,35 @@ function remove_destroyed_objects(check_table)
 			table.remove(check_table, k)
 		end
 	end
+end
+
+function check_collision_cr(circle, rectangle)
+	local circle_x = circle.x + circle.radius
+	local circle_y = circle.y + circle.radius
+	local rect_point_x = circle_x
+	local rect_point_y = circle_y
+	
+	if rect_point_x > rectangle.x + rectangle.width then
+		rect_point_x = rectangle.x + rectangle.width
+	elseif rect_point_x < rectangle.x then
+		rect_point_x = rectangle.x
+	end
+	
+	if rect_point_y > rectangle.y + rectangle.height then
+		rect_point_y = rectangle.y + rectangle.height
+	elseif rect_point_y < rectangle.y then
+		rect_point_y = rectangle.y
+	end
+	
+	return distance(circle_x, rect_point_x, circle_y, rect_point_y) < circle.radius
+end
+
+function check_collision_cc(first, second)
+	return distance(first.x + first.radius, second.x + second.radius, first.y + first.radius, second.y + second.radius) < first.radius + second.radius
+end
+
+function distance(x1, x2, y1, y2)
+	return math.abs(math.sqrt(math.pow(x1 - x2, 2) + math.pow(y1 - y2, 2)))
 end
 
 function PlayState:render()
