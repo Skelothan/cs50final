@@ -12,16 +12,26 @@ end
 function PlayState:update(dt)
 	-- create a player shot if space is held
 	if love.keyboard.isDown("space") and self.player.shot_delay == 0 then
-		local new_shot_l = PlayerShot({
-			x = self.player.x - self.player.GUN_OFFSET - 3, 
+		local new_shot_l1 = PlayerShot({
+			x = self.player.x - self.player.GUN_OFFSET + 1, 
 			y = self.player.y
 		})
-		local new_shot_r = PlayerShot({
-			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 3, 
+		local new_shot_l2 = PlayerShot({
+			x = self.player.x - self.player.GUN_OFFSET - 7, 
 			y = self.player.y
 		})
-		table.insert(self.player_shots, new_shot_l)
-		table.insert(self.player_shots, new_shot_r)
+		local new_shot_r1 = PlayerShot({
+			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 9, 
+			y = self.player.y
+		})
+		local new_shot_r2 = PlayerShot({
+			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 1, 
+			y = self.player.y
+		})
+		table.insert(self.player_shots, new_shot_l1)
+		table.insert(self.player_shots, new_shot_l2)
+		table.insert(self.player_shots, new_shot_r1)
+		table.insert(self.player_shots, new_shot_r2)
 		
 		self.player.shot_delay = 2/60
 	end

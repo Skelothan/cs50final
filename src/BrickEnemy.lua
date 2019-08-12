@@ -7,7 +7,7 @@ function BrickEnemy:init(x, y)
 		width = 32,
 		dx = 0,
 		dy = 10,
-		health = 200,
+		health = 150,
 		score = 400,
 		shotTimer = 3,
 		texture = "breakout",
