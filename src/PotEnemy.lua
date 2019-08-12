@@ -8,7 +8,7 @@ function PotEnemy:init(x, y)
 		dx = 0,
 		dy = 160,
 		health = 40,
-		score = 250,
+		score = 2500,
 		shotTimer = -1,
 		texture = "legend_of_fifty",
 		frame = "legend_of_fifty",

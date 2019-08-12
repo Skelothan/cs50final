@@ -21,11 +21,11 @@ function PlayState:update(dt)
 			y = self.player.y
 		})
 		local new_shot_r1 = PlayerShot({
-			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 9, 
+			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 7, 
 			y = self.player.y
 		})
 		local new_shot_r2 = PlayerShot({
-			x = self.player.x + self.player.width + self.player.GUN_OFFSET - 1, 
+			x = self.player.x + self.player.width + self.player.GUN_OFFSET + 1, 
 			y = self.player.y
 		})
 		table.insert(self.player_shots, new_shot_l1)
@@ -168,6 +168,7 @@ function check_collision_cc(first, second)
 end
 
 function PlayState:render()
+	-- render all game objects
 	self.player:render()
 	for k, enemy in pairs(self.enemies) do
 		enemy:render()
@@ -181,4 +182,7 @@ function PlayState:render()
 	for k, effect in pairs(self.effects) do
 		effect:render()
 	end
+	
+	-- render score text
+	love.graphics.printf(self.score, -8, VIRTUAL_HEIGHT-24, VIRTUAL_WIDTH, "right")
 end

@@ -1,15 +1,16 @@
 BrickEnemy = Class{__includes = Enemy}
 
 function BrickEnemy:init(x, y)
+	self.max_dy = 10
 	Enemy.init(self, x, y, {
 		shape = "rectangle",
 		height = 16,
 		width = 32,
 		dx = 0,
-		dy = 10,
+		dy = 200,
 		health = 150,
 		score = 400,
-		shotTimer = 3,
+		shot_timer = 3,
 		texture = "breakout",
 		frame = "breakout_bricks",
 		frame_number = math.random(1,20)
@@ -17,16 +18,19 @@ function BrickEnemy:init(x, y)
 end
 
 function BrickEnemy:update(dt, play_state)
-	self.shotTimer = self.shotTimer - dt
-	if self.shotTimer <= 0 and self.y < VIRTUAL_HEIGHT/2 then
+	self.shot_timer = self.shot_timer - dt
+	if self.shot_timer <= 0 and self.y < VIRTUAL_HEIGHT/2 then
 		self.shoot(self, play_state)
-		self.shotTimer = 3
+		self.shot_timer = 3
 	end
 	if self.y > VIRTUAL_HEIGHT + self.height + 1 then
 		self.destroyed = true
 	end
 	
 	Enemy.update(self, dt)
+	if self.dy > self.max_dy then
+		self.dy = self.dy - 10
+	end
 end
 
 function BrickEnemy.shoot(self, play_state)
@@ -44,7 +48,7 @@ function BrickEnemy.shoot(self, play_state)
 	local dx = {speed * math.sin(theta), speed * math.sin(theta - shot_spread), speed * math.sin(theta + shot_spread)}
 	
 	for k = 1, 3, 1 do
-		local newShot = EnemyShot({
+		local new_shot = EnemyShot({
 			x = shot_x,
 			y = shot_y,
 			dx = dx[k],
@@ -56,6 +60,6 @@ function BrickEnemy.shoot(self, play_state)
 			frame_number = 181
 		})
 	
-		table.insert(play_state.enemy_shots, newShot)
+		table.insert(play_state.enemy_shots, new_shot)
 	end
 end

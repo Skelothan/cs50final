@@ -36,6 +36,11 @@ function love.load()
 	}
 	gStateMachine:change("play", {})
 	
+	gFonts = {
+		["medium"] = love.graphics.newFont("fonts/font.ttf", 16)
+	}
+	love.graphics.setFont(gFonts["medium"])
+	
 	love.keyboard.keysPressed = {}
 end
 

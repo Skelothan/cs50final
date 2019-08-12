@@ -19,7 +19,7 @@ function Enemy.init(self, x, y, params)
 	
 	self.score = params.score
 	
-	self.shotTimer = params.shotTimer
+	self.shot_timer = params.shot_timer
 	
 	self.texture = params.texture
 	self.frame = params.frame
