@@ -9,6 +9,7 @@ require "src/helpers"
 -- writing my own, which would be nearly identical anyway
 require "lib/StateMachine"
 require "lib/BaseState"
+require "src/states/StartState"
 require "src/states/PlayState"
 
 require "src/PlayerShip"

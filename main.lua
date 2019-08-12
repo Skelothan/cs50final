@@ -4,7 +4,7 @@ require "src/dependencies"
 function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest")
 	math.randomseed(os.time())
-	love.window.setTitle("Destroy CS50")
+	love.window.setTitle("Destroy CS50G")
 	
 	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
 		vsync = true,
@@ -32,12 +32,14 @@ function love.load()
 	}
 	
 	gStateMachine = StateMachine {
+		["start"] = function() return StartState() end,
 		["play"] = function() return PlayState() end
 	}
-	gStateMachine:change("play", {})
+	gStateMachine:change("start", {})
 	
 	gFonts = {
-		["medium"] = love.graphics.newFont("fonts/font.ttf", 16)
+		["medium"] = love.graphics.newFont("fonts/font.ttf", 16),
+		["large"] = love.graphics.newFont("fonts/font.ttf", 32)
 	}
 	love.graphics.setFont(gFonts["medium"])
 	
