@@ -1,5 +1,21 @@
 BrickEnemy = Class{__includes = Enemy}
 
+function BrickEnemy:init(x, y)
+	Enemy.init(self, x, y, {
+		shape = "rectangle",
+		height = 16,
+		width = 32,
+		dx = 0,
+		dy = 10,
+		health = 200,
+		score = 400,
+		shotTimer = 3,
+		texture = "breakout",
+		frame = "breakout_bricks",
+		frame_number = math.random(1,20)
+	})
+end
+
 function BrickEnemy:update(dt, play_state)
 	self.shotTimer = self.shotTimer - dt
 	if self.shotTimer <= 0 and self.y < VIRTUAL_HEIGHT/2 then

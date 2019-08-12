@@ -17,14 +17,18 @@ function love.load()
 		["player_shot"] = love.graphics.newImage("graphics/player/playershot.png"),
 		["eff_player_shot"] = love.graphics.newImage("graphics/player/effect_playershot.png"),
 		["eff_explosion"] = love.graphics.newImage("graphics/shared/explosion.png"),
-		["breakout"] = love.graphics.newImage("graphics/enemy/breakout.png")
+		["breakout"] = love.graphics.newImage("graphics/enemy/breakout.png"),
+		["legend_of_fifty"] = love.graphics.newImage("graphics/enemy/legend_of_fifty.png"),
+		["enemy_shots"] = love.graphics.newImage("graphics/enemy/enemy_shots.png")
 	}
 	
 	gFrames = {
 		["eff_explosion"] = GenerateQuads(gTextures["eff_explosion"], 16, 16),
 		["eff_player_shot"] = GenerateQuads(gTextures["eff_player_shot"], 16, 16),
 		["breakout_bricks"] = GenerateQuads(gTextures["breakout"], 32, 16), -- valid values: 1-21
-		["breakout_balls"] = GenerateQuads(gTextures["breakout"], 8, 8) -- valid values: 157-160, 181-183 inclusive
+		["breakout_balls"] = GenerateQuads(gTextures["breakout"], 8, 8), -- valid values: 157-160, 181-183 inclusive
+		["legend_of_fifty"] = GenerateQuads(gTextures["legend_of_fifty"], 16, 16),
+		["enemy_shots"] = GenerateQuads(gTextures["enemy_shots"], 8, 8)
 	}
 	
 	gStateMachine = StateMachine {

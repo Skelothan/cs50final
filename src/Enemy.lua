@@ -1,6 +1,6 @@
 Enemy = Class{}
 
-function Enemy:init(x, y, params)
+function Enemy.init(self, x, y, params)
 	self.x = x
 	self.y = y
 	

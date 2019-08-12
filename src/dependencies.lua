@@ -3,6 +3,7 @@ Class = require "lib/class"
 require "lib/cs50util"
 
 require "src/constants"
+require "src/helpers"
 
 -- I have chosen to include Mr. Ogden's state machine as a library as opposed to
 -- writing my own, which would be nearly identical anyway
@@ -13,6 +14,8 @@ require "src/states/PlayState"
 require "src/PlayerShip"
 require "src/PlayerShot"
 require "src/Effect"
+
 require "src/Enemy"
 require "src/BrickEnemy"
+require "src/PotEnemy"
 require "src/EnemyShot"

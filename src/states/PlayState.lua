@@ -39,19 +39,12 @@ function PlayState:update(dt)
 	end
 	
 	if love.keyboard.wasPressed("n") then
-		local new_enemy = BrickEnemy(math.random(16, VIRTUAL_WIDTH-16), -16, {
-			shape = "rectangle",
-			height = 16,
-			width = 32,
-			dx = 0,
-			dy = 10,
-			health = 200,
-			score = 400,
-			shotTimer = 3,
-			texture = "breakout",
-			frame = "breakout_bricks",
-			frame_number = math.random(1,20)
-		})
+		local new_enemy = BrickEnemy(math.random(16, VIRTUAL_WIDTH-16), -16)
+		table.insert(self.enemies, new_enemy)
+	end
+	
+	if love.keyboard.wasPressed("p") then
+		local new_enemy = PotEnemy(math.random(16, VIRTUAL_WIDTH-16), -16)
 		table.insert(self.enemies, new_enemy)
 	end
 	
@@ -99,7 +92,7 @@ function PlayState:update(dt)
 				shot.destroyed = true
 				local new_effect = Effect({
 					x = shot.x - shot.width/2,
-					y = enemy.y + enemy.height,
+					y = enemy.y + enemy.height - 8,
 					texture = "eff_player_shot",
 					anim_timer = 0.025,
 					last_frame = 3
@@ -162,10 +155,6 @@ end
 
 function check_collision_cc(first, second)
 	return distance(first.x + first.radius, second.x + second.radius, first.y + first.radius, second.y + second.radius) < first.radius + second.radius
-end
-
-function distance(x1, x2, y1, y2)
-	return math.abs(math.sqrt(math.pow(x1 - x2, 2) + math.pow(y1 - y2, 2)))
 end
 
 function PlayState:render()
