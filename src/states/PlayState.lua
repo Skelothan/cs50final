@@ -54,7 +54,7 @@ function PlayState:update(dt)
 	end
 	
 	if love.keyboard.wasPressed("p") then
-		local new_enemy = PotEnemy(math.random(16, VIRTUAL_WIDTH-16), -16)
+		local new_enemy = PotEnemy(math.random(16, VIRTUAL_WIDTH-16), math.random(-80, -8))
 		table.insert(self.enemies, new_enemy)
 	end
 	

@@ -6,7 +6,7 @@ function PotEnemy:init(x, y)
 		height = 16,
 		width = 16,
 		dx = 0,
-		dy = 160,
+		dy = 320,
 		health = 40,
 		score = 2500,
 		shotTimer = -1,
@@ -22,20 +22,26 @@ function PotEnemy:update(dt, play_state)
 		self.shoot(self, play_state)
 		self.destroyed = true
 	end
-	self.dy = self.dy - 1
+	self.dy = self.dy - 4
 end
 
 function PotEnemy.shoot(self, play_state)
 	local speed = 64
+	local speed_2 = 120
 	
-	local theta = math.pi / 4
+	local theta = math.pi / 8
 	
 	local dy
 	local dx
 	
-	for k = 1, 8, 1 do
-		dy = speed * math.cos(theta * k)
-		dx = speed * math.sin(theta * k)
+	for k = 1, 16, 1 do
+		if k % 2 == 1 then
+			dy = speed * math.cos(theta * k)
+			dx = speed * math.sin(theta * k)
+		else
+			dy = speed_2 * math.cos(theta * k)
+			dx = speed_2 * math.sin(theta * k)
+		end
 		
 		local newShot = EnemyShot({
 			x = self.x + 4,
