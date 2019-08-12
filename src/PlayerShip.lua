@@ -25,18 +25,25 @@ function PlayerShip:init()
 end
 
 function PlayerShip:update(dt)
+	local speed
+	if love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift") then
+		speed = 128
+	else
+		speed = 256
+	end
+	
 	if love.keyboard.isDown("left") then
-		self.dx = -256
+		self.dx = -speed
 	elseif love.keyboard.isDown("right") then
-		self.dx = 256
+		self.dx = speed
 	else
 		self.dx = 0
 	end
 	
 	if love.keyboard.isDown("up") then
-		self.dy = -256
+		self.dy = -speed
 	elseif love.keyboard.isDown("down") then
-		self.dy = 256
+		self.dy = speed
 	else
 		self.dy = 0
 	end
