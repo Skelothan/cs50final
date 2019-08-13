@@ -9,6 +9,7 @@ function PlayState:enter(params)
 	self.score = 0
 	self.freeze_frames = 0
 	self.game_is_over = false
+	self.spawner = Spawner()
 	
 	gMusic["game"]:play()
 end
@@ -54,7 +55,8 @@ function PlayState:update(dt)
 		gSounds["player_shoot"]:play()
 	end
 	
-	-- debug controls
+	-- debug controls, disabled
+	--[[
 	if love.keyboard.wasPressed("e") then
 		local new_effect = Effect({
 			x = self.player.x,
@@ -75,8 +77,11 @@ function PlayState:update(dt)
 		local new_enemy = PotEnemy(math.random(16, VIRTUAL_WIDTH-16), math.random(-80, -8))
 		table.insert(self.enemies, new_enemy)
 	end
+	]]
+	
 	
 	-- move/update everything
+	self.spawner:update(dt, self)
 	self.player:update(dt)
 	for k, object in pairs(self.player_shots) do
 		object:update(dt)

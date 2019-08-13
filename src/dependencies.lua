@@ -1,6 +1,7 @@
 push = require "lib/push"
 Class = require "lib/class"
 require "lib/cs50util"
+require "lib/deepcopy"
 
 require "src/constants"
 require "src/helpers"
@@ -18,6 +19,9 @@ require "src/PlayerShot"
 require "src/Effect"
 
 require "src/Enemy"
+require "src/EmptyEnemy"
 require "src/BrickEnemy"
 require "src/PotEnemy"
 require "src/EnemyShot"
+
+require "src/Spawner"
