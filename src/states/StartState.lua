@@ -2,12 +2,14 @@ StartState = Class{__includes = BaseState}
 
 function StartState:enter(params)
 	self.counter = 0
+	gMusic["title"]:play()
 end
 
 function StartState:update(dt)
 	self.counter = self.counter + dt
 	
 	if love.keyboard.wasPressed("space") then
+		gMusic["title"]:stop()
 		gStateMachine:change("play", {})
 	end
 end

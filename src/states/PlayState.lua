@@ -9,6 +9,8 @@ function PlayState:enter(params)
 	self.score = 0
 	self.freeze_frames = 0
 	self.game_is_over = false
+	
+	gMusic["game"]:play()
 end
 
 function PlayState:update(dt)
@@ -18,6 +20,7 @@ function PlayState:update(dt)
 	end
 	
 	if self.game_is_over then
+		gMusic["game"]:stop()
 		gStateMachine:change("game_over", {score = self.score})
 	end
 	
@@ -91,6 +94,8 @@ function PlayState:update(dt)
 		if check_collision_cc(shot, self.player) then
 			self.freeze_frames = 0.5
 			self.game_is_over = true
+			-- stop the music
+			gMusic["game"]:pause()
 		end
 	end
 	

@@ -31,6 +31,14 @@ function love.load()
 		["enemy_shots"] = GenerateQuads(gTextures["enemy_shots"], 8, 8)
 	}
 	
+	gMusic = {
+		["title"] = love.audio.newSource("music/match3_music1.mp3"),
+		["game"] = love.audio.newSource("music/fiftymon_battle_music.mp3")
+	}
+	for k, track in pairs(gMusic) do
+		track:setLooping(true)
+	end
+	
 	gSounds = {
 		["brick_shoot"] = love.audio.newSource("sounds/breakout_paddle_hit.wav"),
 		["brick_death"] = love.audio.newSource("sounds/brick-hit-1.wav"),

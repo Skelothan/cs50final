@@ -22,7 +22,7 @@ function BrickEnemy:update(dt, play_state)
 	self.shot_timer = self.shot_timer - dt
 	if self.shot_timer <= 0 and self.y < VIRTUAL_HEIGHT/2 then
 		self.shoot(self, play_state)
-		self.shot_timer = 2
+		self.shot_timer = 3
 	end
 	if self.y > VIRTUAL_HEIGHT + self.height + 1 then
 		self.destroyed = true
