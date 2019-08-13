@@ -7,9 +7,20 @@ function PlayState:enter(params)
 	self.enemies = {}
 	self.enemy_shots = {}
 	self.score = 0
+	self.freeze_frames = 0
+	self.game_is_over = false
 end
 
 function PlayState:update(dt)
+	if self.freeze_frames > 0 then
+		self.freeze_frames = self.freeze_frames - dt
+		return
+	end
+	
+	if self.game_is_over then
+		gStateMachine:change("game_over", {score = self.score})
+	end
+	
 	-- create a player shot if space is held
 	if love.keyboard.isDown("space") and self.player.shot_delay == 0 then
 		local new_shot_l1 = PlayerShot({
@@ -78,8 +89,8 @@ function PlayState:update(dt)
 	for k, shot in pairs(self.enemy_shots) do
 		-- player
 		if check_collision_cc(shot, self.player) then
-			shot.destroyed = true
-			gStateMachine:change("game_over", {score = self.score})
+			self.freeze_frames = 0.5
+			self.game_is_over = true
 		end
 	end
 	
