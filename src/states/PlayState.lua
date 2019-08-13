@@ -79,7 +79,7 @@ function PlayState:update(dt)
 		-- player
 		if check_collision_cc(shot, self.player) then
 			shot.destroyed = true
-			-- TODO: damage
+			gStateMachine:change("game_over", {score = self.score})
 		end
 	end
 	

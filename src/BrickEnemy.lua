@@ -36,7 +36,6 @@ end
 function BrickEnemy.shoot(self, play_state)
 	local player_x = play_state.player.x + play_state.player.width/2
 	local player_y = play_state.player.y + play_state.player.height/2
-	-- local speed = 128
 	local shot_spread = 0.25 -- about 15 degrees
 	
 	local shot_x = self.x + self.width/2 - 4

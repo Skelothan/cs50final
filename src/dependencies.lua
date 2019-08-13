@@ -11,6 +11,7 @@ require "lib/StateMachine"
 require "lib/BaseState"
 require "src/states/StartState"
 require "src/states/PlayState"
+require "src/states/GameOverState"
 
 require "src/PlayerShip"
 require "src/PlayerShot"

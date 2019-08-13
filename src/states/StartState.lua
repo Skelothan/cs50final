@@ -8,7 +8,7 @@ function StartState:update(dt)
 	self.counter = self.counter + dt
 	
 	if love.keyboard.wasPressed("space") then
-	gStateMachine:change("play", {})
+		gStateMachine:change("play", {})
 	end
 end
 
