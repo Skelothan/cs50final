@@ -24,6 +24,9 @@ function Enemy.init(self, x, y, params)
 	self.texture = params.texture
 	self.frame = params.frame
 	self.frame_number = params.frame_number
+	
+	self.death_sound = params.death_sound
+	self.shoot_sound = params.shoot_sound
 end
 
 function Enemy.update(self, dt)
@@ -39,6 +42,7 @@ function Enemy.on_death(self, play_state)
 	if not self.destroyed then
 		self.destroyed = true
 		play_state.score = play_state.score + self.score
+		gSounds[self.death_sound]:play()
 	end
 end
 

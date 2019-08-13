@@ -13,7 +13,8 @@ function BrickEnemy:init(x, y)
 		shot_timer = 3,
 		texture = "breakout",
 		frame = "breakout_bricks",
-		frame_number = math.random(1,20)
+		frame_number = math.random(1,20),
+		death_sound = "brick_death"
 	})
 end
 
@@ -63,4 +64,6 @@ function BrickEnemy.shoot(self, play_state)
 			table.insert(play_state.enemy_shots, new_shot)
 		end
 	end
+	
+	gSounds["brick_shoot"]:play()
 end

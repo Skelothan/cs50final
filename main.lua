@@ -31,18 +31,25 @@ function love.load()
 		["enemy_shots"] = GenerateQuads(gTextures["enemy_shots"], 8, 8)
 	}
 	
-	gStateMachine = StateMachine {
-		["start"] = function() return StartState() end,
-		["play"] = function() return PlayState() end,
-		["game_over"] = function() return GameOverState() end
+	gSounds = {
+		["brick_shoot"] = love.audio.newSource("sounds/breakout_paddle_hit.wav"),
+		["brick_death"] = love.audio.newSource("sounds/brick-hit-1.wav"),
+		["pot_shoot"] = love.audio.newSource("sounds/sword_pot.wav"),
+		["pot_death"] = love.audio.newSource("sounds/lo50_hit_enemy.wav")
 	}
-	gStateMachine:change("start", {})
 	
 	gFonts = {
 		["medium"] = love.graphics.newFont("fonts/font.ttf", 16),
 		["large"] = love.graphics.newFont("fonts/font.ttf", 32)
 	}
 	love.graphics.setFont(gFonts["medium"])
+	
+	gStateMachine = StateMachine {
+		["start"] = function() return StartState() end,
+		["play"] = function() return PlayState() end,
+		["game_over"] = function() return GameOverState() end
+	}
+	gStateMachine:change("start", {})
 	
 	love.keyboard.keysPressed = {}
 end

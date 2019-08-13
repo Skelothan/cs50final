@@ -12,7 +12,8 @@ function PotEnemy:init(x, y)
 		shotTimer = -1,
 		texture = "legend_of_fifty",
 		frame = "legend_of_fifty",
-		frame_number = math.random(14,16)
+		frame_number = math.random(14,16),
+		death_sound = "pot_death",
 	})
 end
 
@@ -30,7 +31,6 @@ function PotEnemy.shoot(self, play_state)
 	local speed_2 = 120
 	
 	local theta = math.pi / 8
-	
 	local dy
 	local dx
 	
@@ -57,4 +57,6 @@ function PotEnemy.shoot(self, play_state)
 	
 		table.insert(play_state.enemy_shots, newShot)
 	end
+	
+	gSounds["pot_shoot"]:play()
 end

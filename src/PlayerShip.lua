@@ -32,17 +32,17 @@ function PlayerShip:update(dt)
 		speed = 256
 	end
 	
-	if love.keyboard.isDown("left") then
+	if love.keyboard.isDown("left") or love.keyboard.isDown("a") then
 		self.dx = -speed
-	elseif love.keyboard.isDown("right") then
+	elseif love.keyboard.isDown("right") or love.keyboard.isDown("d") then
 		self.dx = speed
 	else
 		self.dx = 0
 	end
 	
-	if love.keyboard.isDown("up") then
+	if love.keyboard.isDown("up") or love.keyboard.isDown("w") then
 		self.dy = -speed
-	elseif love.keyboard.isDown("down") then
+	elseif love.keyboard.isDown("down") or love.keyboard.isDown("s") then
 		self.dy = speed
 	else
 		self.dy = 0
