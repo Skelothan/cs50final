@@ -21,6 +21,7 @@ function PlayState:update(dt)
 	
 	if self.game_is_over then
 		gMusic["game"]:stop()
+		gSounds["player_death"]:play()
 		gStateMachine:change("game_over", {score = self.score})
 	end
 	
@@ -48,6 +49,9 @@ function PlayState:update(dt)
 		table.insert(self.player_shots, new_shot_r2)
 		
 		self.player.shot_delay = 2/60
+		
+		gSounds["player_shoot"]:stop()
+		gSounds["player_shoot"]:play()
 	end
 	
 	-- debug controls
@@ -93,9 +97,11 @@ function PlayState:update(dt)
 		-- player
 		if check_collision_cc(shot, self.player) then
 			self.freeze_frames = 0.5
-			self.game_is_over = true
-			-- stop the music
 			gMusic["game"]:pause()
+			if not self.game_is_over then
+				gSounds["player_hit"]:play()
+			end
+			self.game_is_over = true
 		end
 	end
 	

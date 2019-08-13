@@ -40,6 +40,9 @@ function love.load()
 	end
 	
 	gSounds = {
+		["player_shoot"] = love.audio.newSource("sounds/player_shot.wav"),
+		["player_hit"] = love.audio.newSource("sounds/50bros_kill.wav"),
+		["player_death"] = love.audio.newSource("sounds/flappy_explosion_echo.wav"),
 		["brick_shoot"] = love.audio.newSource("sounds/breakout_paddle_hit.wav"),
 		["brick_death"] = love.audio.newSource("sounds/brick-hit-1.wav"),
 		["pot_shoot"] = love.audio.newSource("sounds/sword_pot.wav"),
