@@ -38,6 +38,7 @@ function love.load()
 	for k, track in pairs(gMusic) do
 		track:setLooping(true)
 	end
+	gMusic["game"]:setVolume(0.7)
 	
 	gSounds = {
 		["player_shoot"] = love.audio.newSource("sounds/player_shot.wav"),

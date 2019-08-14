@@ -14,14 +14,12 @@ function Spawner:update(dt, play_state)
 	if self.spawn_timer <= 0 then
 		table.insert(play_state.enemies, self.next_enemy)
 		local next_spawn = table.remove(self.wave)
-		print(next_spawn)
 		self.next_enemy = next_spawn[2]
 		self.spawn_timer = next_spawn[1]
 		
 	end
 	
 	if next(self.wave) == nil then
-		print("Loading a new wave...")
 		self.wave = table.deepcopy(rand_choice(gWaves))
 	end
 end
