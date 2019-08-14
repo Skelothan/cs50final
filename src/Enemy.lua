@@ -42,6 +42,7 @@ function Enemy.on_death(self, play_state)
 	if not self.destroyed then
 		self.destroyed = true
 		play_state.score = play_state.score + self.score
+		gSounds[self.death_sound]:stop()
 		gSounds[self.death_sound]:play()
 	end
 end

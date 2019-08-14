@@ -79,6 +79,12 @@ function PlayState:update(dt)
 	end
 	]]
 	
+	if love.keyboard.wasPressed("n") then
+		local side = math.random(0,1)
+		local new_enemy = FiftyBroEnemy(side * VIRTUAL_WIDTH + (side-1) * 8, 128)
+		table.insert(self.enemies, new_enemy)
+	end
+	
 	
 	-- move/update everything
 	self.spawner:update(dt, self)

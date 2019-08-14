@@ -19,11 +19,11 @@ end
 
 function PotEnemy:update(dt, play_state)
 	Enemy.update(self, dt)
-	if self.dy == 0 then
+	if self.dy <= 0 then
 		self.shoot(self, play_state)
 		self.destroyed = true
 	end
-	self.dy = self.dy - 4
+	self.dy = self.dy - 240 * dt
 end
 
 function PotEnemy.shoot(self, play_state)
@@ -48,6 +48,8 @@ function PotEnemy.shoot(self, play_state)
 			y = self.y + 4,
 			dx = dx,
 			dy = dy,
+			ddx = 0,
+			ddy = 0,
 			width = 8,
 			height = 8,
 			texture = "enemy_shots",
@@ -58,5 +60,6 @@ function PotEnemy.shoot(self, play_state)
 		table.insert(play_state.enemy_shots, newShot)
 	end
 	
+	gSounds["pot_shoot"]:stop()
 	gSounds["pot_shoot"]:play()
 end

@@ -19,7 +19,9 @@ function love.load()
 		["eff_explosion"] = love.graphics.newImage("graphics/shared/explosion.png"),
 		["breakout"] = love.graphics.newImage("graphics/enemy/breakout.png"),
 		["legend_of_fifty"] = love.graphics.newImage("graphics/enemy/legend_of_fifty.png"),
-		["enemy_shots"] = love.graphics.newImage("graphics/enemy/enemy_shots.png")
+		["enemy_shots"] = love.graphics.newImage("graphics/enemy/enemy_shots.png"),
+		["fiftybros_alien"] = love.graphics.newImage("graphics/enemy/green_alien.png"),
+		["fiftybros_gems"] = love.graphics.newImage("graphics/enemy/gems.png")
 	}
 	
 	gFrames = {
@@ -28,7 +30,9 @@ function love.load()
 		["breakout_bricks"] = GenerateQuads(gTextures["breakout"], 32, 16), -- valid values: 1-21
 		["breakout_balls"] = GenerateQuads(gTextures["breakout"], 8, 8), -- valid values: 157-160, 181-183 inclusive
 		["legend_of_fifty"] = GenerateQuads(gTextures["legend_of_fifty"], 16, 16),
-		["enemy_shots"] = GenerateQuads(gTextures["enemy_shots"], 8, 8)
+		["enemy_shots"] = GenerateQuads(gTextures["enemy_shots"], 8, 8),
+		["fiftybros_alien"] = GenerateQuads(gTextures["fiftybros_alien"], 16, 20),
+		["fiftybros_gems"] = GenerateQuads(gTextures["fiftybros_gems"], 16, 16)
 	}
 	
 	gMusic = {
@@ -47,7 +51,10 @@ function love.load()
 		["brick_shoot"] = love.audio.newSource("sounds/breakout_paddle_hit.wav"),
 		["brick_death"] = love.audio.newSource("sounds/brick-hit-1.wav"),
 		["pot_shoot"] = love.audio.newSource("sounds/sword_pot.wav"),
-		["pot_death"] = love.audio.newSource("sounds/lo50_hit_enemy.wav")
+		["pot_death"] = love.audio.newSource("sounds/lo50_hit_enemy.wav"),
+		["fiftybro_shoot"] = love.audio.newSource("sounds/50bros_pickup.wav"),
+		["fiftybro_death1"] = love.audio.newSource("sounds/50bros_kill.wav"),
+		["fiftybro_death2"] = love.audio.newSource("sounds/50bros_kill2.wav")
 	}
 	
 	gFonts = {

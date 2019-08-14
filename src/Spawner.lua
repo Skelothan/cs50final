@@ -25,17 +25,17 @@ function Spawner:update(dt, play_state)
 end
 
 gWaves = {
-	--four bricks, left-to-right
+	--six bricks, left-to-right
 	{
-		{6, EmptyEnemy()},
+		{4.5, EmptyEnemy()},
 		{1, BrickEnemy(VIRTUAL_WIDTH - 64, -16)},
 		{1, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
 		{1, BrickEnemy(128, -16)},
 		{1, BrickEnemy(64, -16)}
 	},
-	--four bricks, right-to-left
+	--six bricks, right-to-left
 	{
-		{6, EmptyEnemy()},
+		{4.5, EmptyEnemy()},
 		{1, BrickEnemy(64, -16)},
 		{1, BrickEnemy(128, -16)},
 		{1, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
@@ -48,5 +48,24 @@ gWaves = {
 		{.5, PotEnemy(128, -32)},
 		{0, PotEnemy(VIRTUAL_WIDTH - 256, -16)},
 		{.5, PotEnemy(256, -16)}
+	},
+	--two fiftybros from the left and right, top first
+	{
+		{1.25, EmptyEnemy()},
+		{0, FiftyBroEnemy(VIRTUAL_WIDTH + 8, 200)},
+		{.75, FiftyBroEnemy(-8, 200)},
+		{0, FiftyBroEnemy(VIRTUAL_WIDTH + 8, 128)},
+		{.5, FiftyBroEnemy(-8, 128)}
+	},
+	--a fiftybro from the right
+	--[[
+	{
+		{1, EmptyEnemy()},
+		{0, PotEnemy(VIRTUAL_WIDTH - 128, -32)},
+		{.5, PotEnemy(128, -32)},
+		{0, PotEnemy(VIRTUAL_WIDTH - 256, -16)},
+		{.5, PotEnemy(256, -16)}
 	}
+	]]
+	
 }

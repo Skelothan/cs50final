@@ -19,9 +19,11 @@ require "src/PlayerShot"
 require "src/Effect"
 
 require "src/Enemy"
+require "src/EnemyShot"
 require "src/EmptyEnemy"
+
 require "src/BrickEnemy"
 require "src/PotEnemy"
-require "src/EnemyShot"
+require "src/FiftyBroEnemy"
 
 require "src/Spawner"

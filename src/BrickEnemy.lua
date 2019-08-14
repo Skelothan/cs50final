@@ -30,8 +30,11 @@ function BrickEnemy:update(dt, play_state)
 	
 	Enemy.update(self, dt)
 	if self.dy > self.max_dy then
-		self.dy = self.dy - 10
+		self.dy = self.dy - 600 * dt
+	else
+		self.dy = self.max_dy
 	end
+	
 end
 
 function BrickEnemy.shoot(self, play_state)
@@ -44,6 +47,8 @@ function BrickEnemy.shoot(self, play_state)
 	
 	local theta = math.atan2((player_x - shot_x), (player_y - shot_y))
 	
+	local speed
+	
 	for speed = 96, 128, 16 do
 		local dy = {speed * math.cos(theta), speed * math.cos(theta - shot_spread), speed * math.cos(theta + shot_spread)}
 		local dx = {speed * math.sin(theta), speed * math.sin(theta - shot_spread), speed * math.sin(theta + shot_spread)}
@@ -54,6 +59,8 @@ function BrickEnemy.shoot(self, play_state)
 				y = shot_y,
 				dx = dx[k],
 				dy = dy[k],
+				ddx = 0,
+				ddy = 0,
 				width = 8,
 				height = 8,
 				texture = "breakout",
@@ -65,5 +72,6 @@ function BrickEnemy.shoot(self, play_state)
 		end
 	end
 	
+	gSounds["brick_shoot"]:stop()
 	gSounds["brick_shoot"]:play()
 end
