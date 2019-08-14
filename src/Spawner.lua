@@ -28,18 +28,22 @@ gWaves = {
 	--six bricks, left-to-right
 	{
 		{4.5, EmptyEnemy()},
-		{1, BrickEnemy(VIRTUAL_WIDTH - 64, -16)},
-		{1, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
-		{1, BrickEnemy(128, -16)},
-		{1, BrickEnemy(64, -16)}
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 64, -16)},
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 192, -16)},
+		{0.75, BrickEnemy(192, -16)},
+		{0.75, BrickEnemy(128, -16)},
+		{0.75, BrickEnemy(64, -16)}
 	},
 	--six bricks, right-to-left
 	{
 		{4.5, EmptyEnemy()},
-		{1, BrickEnemy(64, -16)},
-		{1, BrickEnemy(128, -16)},
-		{1, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
-		{1, BrickEnemy(VIRTUAL_WIDTH - 64, -16)}
+		{0.75, BrickEnemy(64, -16)},
+		{0.75, BrickEnemy(128, -16)},
+		{0.75, BrickEnemy(192, -16)},
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 192, -16)},
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 128, -16)},
+		{0.75, BrickEnemy(VIRTUAL_WIDTH - 64, -16)}
 	},
 	--four pots, top-heavy trapezoid, bottom first
 	{
@@ -49,7 +53,7 @@ gWaves = {
 		{0, PotEnemy(VIRTUAL_WIDTH - 256, -16)},
 		{.5, PotEnemy(256, -16)}
 	},
-	--two fiftybros from the left and right, top first
+	--two fiftybros from the left and right each, top first
 	{
 		{1.25, EmptyEnemy()},
 		{0, FiftyBroEnemy(VIRTUAL_WIDTH + 8, 200)},
@@ -57,15 +61,12 @@ gWaves = {
 		{0, FiftyBroEnemy(VIRTUAL_WIDTH + 8, 128)},
 		{.5, FiftyBroEnemy(-8, 128)}
 	},
-	--a fiftybro from the right
-	--[[
+	--two fiftybros and a pot in the middle
 	{
 		{1, EmptyEnemy()},
-		{0, PotEnemy(VIRTUAL_WIDTH - 128, -32)},
-		{.5, PotEnemy(128, -32)},
-		{0, PotEnemy(VIRTUAL_WIDTH - 256, -16)},
-		{.5, PotEnemy(256, -16)}
+		{1, PotEnemy(VIRTUAL_WIDTH/2 - 8, -12)},
+		{0, FiftyBroEnemy(VIRTUAL_WIDTH + 8, 140)},
+		{.5, FiftyBroEnemy(-8, 140)}
 	}
-	]]
 	
 }

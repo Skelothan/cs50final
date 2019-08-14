@@ -77,13 +77,13 @@ function PlayState:update(dt)
 		local new_enemy = PotEnemy(math.random(16, VIRTUAL_WIDTH-16), math.random(-80, -8))
 		table.insert(self.enemies, new_enemy)
 	end
-	]]
 	
 	if love.keyboard.wasPressed("n") then
 		local side = math.random(0,1)
 		local new_enemy = FiftyBroEnemy(side * VIRTUAL_WIDTH + (side-1) * 8, 128)
 		table.insert(self.enemies, new_enemy)
 	end
+	]]
 	
 	
 	-- move/update everything

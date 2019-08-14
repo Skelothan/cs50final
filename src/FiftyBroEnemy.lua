@@ -13,7 +13,7 @@ function FiftyBroEnemy:init(x, y)
 		texture = "fiftybros_alien",
 		frame = "fiftybros_alien",
 		frame_number = 1,
-		death_sound = "fiftybro_death"
+		death_sound = "fiftybro_death2"
 	})
 	
 	-- reverse initial velocity if starting on right of screen
@@ -45,15 +45,15 @@ end
 function FiftyBroEnemy.shoot(self, play_state)
 	local dx
 	
-	for dx = 64, 128, 32 do
+	for dx = 32, 160, 64 do
 		for k = -1, 1, 2 do
 			local new_shot = EnemyShot({
 				x = self.x,
 				y = self.y,
 				dx = dx * k,
-				dy = -250,
+				dy = -100,
 				ddx = 0,
-				ddy = 500,
+				ddy = 200,
 				width = 16,
 				height = 16,
 				texture = "fiftybros_gems",
